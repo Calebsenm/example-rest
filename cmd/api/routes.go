@@ -11,7 +11,7 @@ func (app *application) routes() http.Handler {
 
 	mux := http.NewServeMux()
 
-	  mux.Handle("/docs/", httpSwagger.WrapHandler)
+	mux.Handle("/docs/", httpSwagger.WrapHandler)
 
 	mux.HandleFunc("POST /api/project/create", app.createProject)
 	mux.HandleFunc("GET /api/project/get_alls", app.getallProjects)

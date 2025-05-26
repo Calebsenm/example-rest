@@ -31,7 +31,7 @@ type config struct {
 func (app *application) run(mux http.Handler) error {
 
 	srv := &http.Server{
-		Addr:         app.config.addr,
+		Addr:         ":"+ app.config.addr,
 		Handler:      mux,
 		WriteTimeout: time.Second * 30,
 		ReadTimeout:  time.Second * 10,

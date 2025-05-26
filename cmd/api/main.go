@@ -24,7 +24,7 @@ func main() {
     }
 
 	conf := &config{
-		addr: env.GetEnv("PORT", ":4000"),
+		addr: env.GetEnv("PORT", "4000"),
 		db: dbConfig{
 			addr:         env.GetEnv("MYSQL_DNS", "root:admin@(127.0.0.1:3306)/js_api?parseTime=true"),
 			maxOpenConns: env.GetEnvInt("DB_MAX_OPEN_CONNS", 20),
@@ -47,6 +47,7 @@ func main() {
 
 	fmt.Println("Database connection pool established")
 	fmt.Println("Server is running")
+	fmt.Println(conf.addr)
 
 
 	store := store.NewStorage(db)
