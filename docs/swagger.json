@@ -1,0 +1,173 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Rest Api for test",
+        "title": "Rest api",
+        "contact": {},
+        "version": "1.0"
+    },
+    "basePath": "/api/",
+    "paths": {
+        "/participant/create": {
+            "post": {
+                "description": "Crea un nuevo participante",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Participantes"
+                ],
+                "summary": "Crear participante",
+                "parameters": [
+                    {
+                        "description": "Datos del participante",
+                        "name": "participant",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/store.Participants"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/store.Participants"
+                        }
+                    }
+                }
+            }
+        },
+        "/participant/get_alls": {
+            "get": {
+                "description": "Retorna la lista de todos los participantes registrados",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Participantes"
+                ],
+                "summary": "Obtener todos los participantes",
+                "responses": {
+                    "200": {
+                        "description": "Lista de participantes",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/store.Participants"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/project/create": {
+            "post": {
+                "description": "Crea un nuevo proyecto",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Proyectos"
+                ],
+                "summary": "Crear participante",
+                "parameters": [
+                    {
+                        "description": "Datos del participante",
+                        "name": "participant",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/store.Project"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/store.Project"
+                        }
+                    }
+                }
+            }
+        },
+        "/project/get_alls": {
+            "get": {
+                "description": "Retorna la lista de todos los proyectos registrados",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Proyectos"
+                ],
+                "summary": "Obtener todos los proyectos",
+                "responses": {
+                    "200": {
+                        "description": "Lista de proyectos",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/store.Project"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "store.Participants": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "firs_name": {
+                    "type": "string"
+                },
+                "identificacion": {
+                    "type": "string"
+                },
+                "last_name": {
+                    "type": "string"
+                },
+                "phone": {
+                    "type": "string"
+                }
+            }
+        },
+        "store.Project": {
+            "type": "object",
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "end_date": {
+                    "type": "string",
+                    "example": "2024-10-10T00:00:00Z"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "project_id": {
+                    "type": "integer"
+                },
+                "start_date": {
+                    "type": "string",
+                    "example": "2024-10-10T00:00:00Z"
+                },
+                "value": {
+                    "type": "number"
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,113 @@
+basePath: /api/
+definitions:
+  store.Participants:
+    properties:
+      email:
+        type: string
+      firs_name:
+        type: string
+      identificacion:
+        type: string
+      last_name:
+        type: string
+      phone:
+        type: string
+    type: object
+  store.Project:
+    properties:
+      description:
+        type: string
+      end_date:
+        example: "2024-10-10T00:00:00Z"
+        type: string
+      name:
+        type: string
+      project_id:
+        type: integer
+      start_date:
+        example: "2024-10-10T00:00:00Z"
+        type: string
+      value:
+        type: number
+    type: object
+info:
+  contact: {}
+  description: Rest Api for test
+  title: Rest api
+  version: "1.0"
+paths:
+  /participant/create:
+    post:
+      consumes:
+      - application/json
+      description: Crea un nuevo participante
+      parameters:
+      - description: Datos del participante
+        in: body
+        name: participant
+        required: true
+        schema:
+          $ref: '#/definitions/store.Participants'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/store.Participants'
+      summary: Crear participante
+      tags:
+      - Participantes
+  /participant/get_alls:
+    get:
+      description: Retorna la lista de todos los participantes registrados
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Lista de participantes
+          schema:
+            items:
+              $ref: '#/definitions/store.Participants'
+            type: array
+      summary: Obtener todos los participantes
+      tags:
+      - Participantes
+  /project/create:
+    post:
+      consumes:
+      - application/json
+      description: Crea un nuevo proyecto
+      parameters:
+      - description: Datos del participante
+        in: body
+        name: participant
+        required: true
+        schema:
+          $ref: '#/definitions/store.Project'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/store.Project'
+      summary: Crear participante
+      tags:
+      - Proyectos
+  /project/get_alls:
+    get:
+      description: Retorna la lista de todos los proyectos registrados
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Lista de proyectos
+          schema:
+            items:
+              $ref: '#/definitions/store.Project'
+            type: array
+      summary: Obtener todos los proyectos
+      tags:
+      - Proyectos
+swagger: "2.0"
