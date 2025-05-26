@@ -1,1 +1,1 @@
-DROP TABLE IF EXIST proyect; 
+DROP TABLE IF EXISTS proyect; 

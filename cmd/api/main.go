@@ -18,6 +18,11 @@ import (
 // @BasePath   /api/
 func main() {
 
+	err := env.LoadEnv()
+    if err != nil {
+        fmt.Println("Error loading .env file:", err)
+    }
+
 	conf := &config{
 		addr: env.GetEnv("PORT", ":4000"),
 		db: dbConfig{
@@ -41,7 +46,8 @@ func main() {
 	defer db.Close()
 
 	fmt.Println("Database connection pool established")
-	fmt.Println("Server is running in http://localhost:4000/")
+	fmt.Println("Server is running")
+
 
 	store := store.NewStorage(db)
 	infoLog := log.New(os.Stdout, "INFO\t", log.Ldate|log.Ltime)

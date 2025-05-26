@@ -1,1 +1,1 @@
-DROP TABLE IF EXIST participant; 
+DROP TABLE IF EXISTS participant; 
