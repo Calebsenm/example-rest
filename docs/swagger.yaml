@@ -1,5 +1,12 @@
 basePath: /api/
 definitions:
+  store.Assignment:
+    properties:
+      participant_id:
+        type: integer
+      project_id:
+        type: integer
+    type: object
   store.Participants:
     properties:
       email:
@@ -36,6 +43,28 @@ info:
   title: Rest api
   version: "1.0"
 paths:
+  /assignments:
+    post:
+      consumes:
+      - application/json
+      description: Asigna un proyecto a un estudiante
+      parameters:
+      - description: Id para asignar un proyecto
+        in: body
+        name: assignment
+        required: true
+        schema:
+          $ref: '#/definitions/store.Assignment'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/store.Assignment'
+      summary: Asignar Proyecto
+      tags:
+      - AsignarProyecto
   /participant/create:
     post:
       consumes:
@@ -81,7 +110,7 @@ paths:
       parameters:
       - description: Datos del participante
         in: body
-        name: participant
+        name: proyect
         required: true
         schema:
           $ref: '#/definitions/store.Project'
@@ -92,7 +121,7 @@ paths:
           description: Created
           schema:
             $ref: '#/definitions/store.Project'
-      summary: Crear participante
+      summary: Crear proyecto
       tags:
       - Proyectos
   /project/get_alls:

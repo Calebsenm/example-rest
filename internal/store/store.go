@@ -23,11 +23,16 @@ type Storage struct {
 		Create(context.Context , *Participants) error
 		GetAlls(context.Context) (*[]Participants, error)
 	}
+
+	Assignment interface{ 
+		AssignProject(context.Context , *Assignment) error
+	}
 }
 
 func NewStorage(db *sql.DB) Storage {
 	return Storage{
 		Projects:       &ProjectsStore{db},
 		Participants: &ParticipantsStore{db},
+		Assignment:  &AssignmentStore{db},
 	}
 }

@@ -5,12 +5,12 @@ import (
 	"rest-api/internal/store"
 )
 
-// @Summary Crear participante
+// @Summary Crear proyecto 
 // @Description Crea un nuevo proyecto
 // @Tags Proyectos
 // @Accept json
 // @Produce json
-// @Param participant body store.Project true "Datos del participante"
+// @Param proyect body store.Project true "Datos del participante"
 // @Success 201 {object} store.Project
 // @Router /project/create [post]
 func (app *application) createProject(w http.ResponseWriter, r *http.Request) {

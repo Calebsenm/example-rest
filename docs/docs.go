@@ -15,6 +15,40 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/assignments": {
+            "post": {
+                "description": "Asigna un proyecto a un estudiante",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "AsignarProyecto"
+                ],
+                "summary": "Asignar Proyecto",
+                "parameters": [
+                    {
+                        "description": "Id para asignar un proyecto",
+                        "name": "assignment",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/store.Assignment"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/store.Assignment"
+                        }
+                    }
+                }
+            }
+        },
         "/participant/create": {
             "post": {
                 "description": "Crea un nuevo participante",
@@ -84,11 +118,11 @@ const docTemplate = `{
                 "tags": [
                     "Proyectos"
                 ],
-                "summary": "Crear participante",
+                "summary": "Crear proyecto",
                 "parameters": [
                     {
                         "description": "Datos del participante",
-                        "name": "participant",
+                        "name": "proyect",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -131,6 +165,17 @@ const docTemplate = `{
         }
     },
     "definitions": {
+        "store.Assignment": {
+            "type": "object",
+            "properties": {
+                "participant_id": {
+                    "type": "integer"
+                },
+                "project_id": {
+                    "type": "integer"
+                }
+            }
+        },
         "store.Participants": {
             "type": "object",
             "properties": {

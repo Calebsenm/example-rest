@@ -15,9 +15,13 @@ func (app *application) routes() http.Handler {
 
 	mux.HandleFunc("POST /api/project/create", app.createProject)
 	mux.HandleFunc("GET /api/project/get_alls", app.getallProjects)
+	//mux.HandleFunc("GET /api/projec/available", app.getAvailableProjects)
 
 	mux.HandleFunc("POST /api/participant/create", app.createParticipant)
 	mux.HandleFunc("GET /api/participant/get_alls", app.getallParticipant)
+	//mux.HandleFunc("GET /participant/:id/project" app.viewUserProject)
+
+	mux.HandleFunc("POST /api/assignments" , app.assigmentProject)
 
 	return  app.enableCORS(app.logRequest(mux))
 }
