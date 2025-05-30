@@ -7,6 +7,19 @@ definitions:
       project_id:
         type: integer
     type: object
+  store.AssignmentDetail:
+    properties:
+      participant_id:
+        type: integer
+      participant_last_name:
+        type: string
+      participant_name:
+        type: string
+      project_id:
+        type: integer
+      project_name:
+        type: string
+    type: object
   store.Participants:
     properties:
       email:
@@ -44,6 +57,20 @@ info:
   version: "1.0"
 paths:
   /assignments:
+    get:
+      description: Obtiene la lista de asignaciones con detalles del proyecto y participante
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/store.AssignmentDetail'
+            type: array
+      summary: Listar asignaciones de proyectos
+      tags:
+      - AsignarProyecto
     post:
       consumes:
       - application/json
@@ -137,6 +164,28 @@ paths:
               $ref: '#/definitions/store.Project'
             type: array
       summary: Obtener todos los proyectos
+      tags:
+      - Proyectos
+  /project/search:
+    get:
+      description: Retorna una lista de proyectos cuyo nombre coincide parcialmente
+        con el valor buscado
+      parameters:
+      - description: Nombre del proyecto a buscar
+        in: query
+        name: name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Lista de proyectos encontrados
+          schema:
+            items:
+              $ref: '#/definitions/store.Project'
+            type: array
+      summary: Buscar proyectos por nombre
       tags:
       - Proyectos
 swagger: "2.0"

@@ -71,3 +71,28 @@ func (app *application) getallProjects(w http.ResponseWriter, r *http.Request) {
 		app.internalServerError(w, r, err)
 	}
 }
+
+// searchProject busca proyectos por nombre
+// @Summary Buscar proyectos por nombre
+// @Description Retorna una lista de proyectos cuyo nombre coincide parcialmente con el valor buscado
+// @Tags Proyectos
+// @Produce json
+// @Param name query string true "Nombre del proyecto a buscar"
+// @Success 200 {object} []store.Project "Lista de proyectos encontrados"
+// @Router /project/search [get]
+func (app *application) searchProject(w http.ResponseWriter, r *http.Request) {
+    name := r.URL.Query().Get("name")
+    if name == "" {
+        http.Error(w, "Missing name parameter", http.StatusBadRequest)
+        return
+    }
+
+    ctx := r.Context()
+    projects, err := app.store.Projects.SearchByName(ctx, name)
+    if err != nil {
+        app.internalServerError(w, r, err)
+        return
+    }
+
+    app.writeJSON(w, http.StatusOK, envelope{"projects": projects}, nil)
+}

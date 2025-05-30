@@ -82,3 +82,27 @@ func (p *ProjectsStore) GetAlls(ctx context.Context) (*[]Project, error) {
 
 	return &projects, nil
 }
+
+func (p *ProjectsStore) SearchByName(ctx context.Context, name string) (*[]Project, error) {
+    query := `SELECT project_id, name, description, start_date, end_date, value 
+              FROM projects WHERE name LIKE ?`
+
+    rows, err := p.db.QueryContext(ctx, query, "%"+name+"%")
+    if err != nil {
+        return nil, err
+    }
+    defer rows.Close()
+
+    var projects []Project
+    for rows.Next() {
+        var proj Project
+        err := rows.Scan(&proj.ProjectID, &proj.Name, &proj.Description, &proj.StartDate, &proj.EndDate, &proj.Value)
+        if err != nil {
+            return nil, err
+        }
+        projects = append(projects, proj)
+    }
+
+    return &projects, nil
+}
+

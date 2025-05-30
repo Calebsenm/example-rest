@@ -16,6 +16,27 @@ const docTemplate = `{
     "basePath": "{{.BasePath}}",
     "paths": {
         "/assignments": {
+            "get": {
+                "description": "Obtiene la lista de asignaciones con detalles del proyecto y participante",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "AsignarProyecto"
+                ],
+                "summary": "Listar asignaciones de proyectos",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/store.AssignmentDetail"
+                            }
+                        }
+                    }
+                }
+            },
             "post": {
                 "description": "Asigna un proyecto a un estudiante",
                 "consumes": [
@@ -162,6 +183,38 @@ const docTemplate = `{
                     }
                 }
             }
+        },
+        "/project/search": {
+            "get": {
+                "description": "Retorna una lista de proyectos cuyo nombre coincide parcialmente con el valor buscado",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Proyectos"
+                ],
+                "summary": "Buscar proyectos por nombre",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Nombre del proyecto a buscar",
+                        "name": "name",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lista de proyectos encontrados",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/store.Project"
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -173,6 +226,26 @@ const docTemplate = `{
                 },
                 "project_id": {
                     "type": "integer"
+                }
+            }
+        },
+        "store.AssignmentDetail": {
+            "type": "object",
+            "properties": {
+                "participant_id": {
+                    "type": "integer"
+                },
+                "participant_last_name": {
+                    "type": "string"
+                },
+                "participant_name": {
+                    "type": "string"
+                },
+                "project_id": {
+                    "type": "integer"
+                },
+                "project_name": {
+                    "type": "string"
                 }
             }
         },

@@ -18,6 +18,8 @@ type Storage struct {
 	Projects interface {
 		Create(context.Context , *Project) error
 		GetAlls(context.Context) (*[]Project, error)
+		SearchByName(context.Context,  string) (*[]Project, error)
+
 	}
 	Participants interface {
 		Create(context.Context , *Participants) error
@@ -26,6 +28,7 @@ type Storage struct {
 
 	Assignment interface{ 
 		AssignProject(context.Context , *Assignment) error
+        GetAlls(context.Context) (*[]AssignmentDetail, error)
 	}
 }
 

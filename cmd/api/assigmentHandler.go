@@ -39,3 +39,24 @@ func (app *application) assigmentProject(w http.ResponseWriter , r *http.Request
 		app.internalServerError(w , r , err)
 	}
 }
+
+// @Summary Listar asignaciones de proyectos
+// @Description Obtiene la lista de asignaciones con detalles del proyecto y participante
+// @Tags AsignarProyecto
+// @Produce json
+// @Success 200 {array} store.AssignmentDetail
+// @Router /assignments [get]
+func (app *application) getAssignments(w http.ResponseWriter, r *http.Request) {
+    ctx := r.Context()
+
+    assignments, err := app.store.Assignment.GetAlls(ctx)
+    if err != nil {
+        app.internalServerError(w, r, err)
+        return
+    }
+
+    err = app.writeJSON(w, http.StatusOK, envelope{"assignments": assignments}, nil)
+    if err != nil {
+        app.internalServerError(w, r, err)
+    }
+}
