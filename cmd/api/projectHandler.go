@@ -12,7 +12,7 @@ import (
 // @Produce json
 // @Param proyect body store.Project true "Datos del participante"
 // @Success 201 {object} store.Project
-// @Router /project/create [post]
+// @Router /projects [post]
 func (app *application) createProject(w http.ResponseWriter, r *http.Request) {
 
 	var input store.Project
@@ -54,7 +54,7 @@ func (app *application) createProject(w http.ResponseWriter, r *http.Request) {
 // @Tags Proyectos
 // @Produce json
 // @Success 200 {object} []store.Project "Lista de proyectos"
-// @Router /project/get_alls [get]
+// @Router /projects [get]
 func (app *application) getallProjects(w http.ResponseWriter, r *http.Request) {
 
 	ctx := r.Context()
@@ -79,7 +79,7 @@ func (app *application) getallProjects(w http.ResponseWriter, r *http.Request) {
 // @Produce json
 // @Param name query string true "Nombre del proyecto a buscar"
 // @Success 200 {object} []store.Project "Lista de proyectos encontrados"
-// @Router /project/search [get]
+// @Router /project [get]
 func (app *application) searchProject(w http.ResponseWriter, r *http.Request) {
     name := r.URL.Query().Get("name")
     if name == "" {

@@ -92,7 +92,21 @@ paths:
       summary: Asignar Proyecto
       tags:
       - AsignarProyecto
-  /participant/create:
+  /participants:
+    get:
+      description: Retorna la lista de todos los participantes registrados
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Lista de participantes
+          schema:
+            items:
+              $ref: '#/definitions/store.Participants'
+            type: array
+      summary: Obtener todos los participantes
+      tags:
+      - Participantes
     post:
       consumes:
       - application/json
@@ -114,59 +128,7 @@ paths:
       summary: Crear participante
       tags:
       - Participantes
-  /participant/get_alls:
-    get:
-      description: Retorna la lista de todos los participantes registrados
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: Lista de participantes
-          schema:
-            items:
-              $ref: '#/definitions/store.Participants'
-            type: array
-      summary: Obtener todos los participantes
-      tags:
-      - Participantes
-  /project/create:
-    post:
-      consumes:
-      - application/json
-      description: Crea un nuevo proyecto
-      parameters:
-      - description: Datos del participante
-        in: body
-        name: proyect
-        required: true
-        schema:
-          $ref: '#/definitions/store.Project'
-      produces:
-      - application/json
-      responses:
-        "201":
-          description: Created
-          schema:
-            $ref: '#/definitions/store.Project'
-      summary: Crear proyecto
-      tags:
-      - Proyectos
-  /project/get_alls:
-    get:
-      description: Retorna la lista de todos los proyectos registrados
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: Lista de proyectos
-          schema:
-            items:
-              $ref: '#/definitions/store.Project'
-            type: array
-      summary: Obtener todos los proyectos
-      tags:
-      - Proyectos
-  /project/search:
+  /project:
     get:
       description: Retorna una lista de proyectos cuyo nombre coincide parcialmente
         con el valor buscado
@@ -186,6 +148,42 @@ paths:
               $ref: '#/definitions/store.Project'
             type: array
       summary: Buscar proyectos por nombre
+      tags:
+      - Proyectos
+  /projects:
+    get:
+      description: Retorna la lista de todos los proyectos registrados
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Lista de proyectos
+          schema:
+            items:
+              $ref: '#/definitions/store.Project'
+            type: array
+      summary: Obtener todos los proyectos
+      tags:
+      - Proyectos
+    post:
+      consumes:
+      - application/json
+      description: Crea un nuevo proyecto
+      parameters:
+      - description: Datos del participante
+        in: body
+        name: proyect
+        required: true
+        schema:
+          $ref: '#/definitions/store.Project'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/store.Project'
+      summary: Crear proyecto
       tags:
       - Proyectos
 swagger: "2.0"

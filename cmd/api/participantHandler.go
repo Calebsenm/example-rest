@@ -12,7 +12,7 @@ import (
 // @Produce json
 // @Param participant body store.Participants true "Datos del participante"
 // @Success 201 {object} store.Participants
-// @Router /participant/create [post]
+// @Router /participants [post]
 func (app *application) createParticipant(w http.ResponseWriter, r *http.Request) {
 
 	var input store.Participants
@@ -51,7 +51,7 @@ func (app *application) createParticipant(w http.ResponseWriter, r *http.Request
 // @Tags Participantes
 // @Produce json
 // @Success 200 {object} []store.Participants "Lista de participantes"
-// @Router /participant/get_alls [get]
+// @Router /participants [get]
 func (app *application) getallParticipant(w http.ResponseWriter, r *http.Request) {
 
 	ctx := r.Context()

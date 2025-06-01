@@ -11,13 +11,13 @@ func (app *application) routes() http.Handler {
 
 	mux.Handle("/docs/", httpSwagger.WrapHandler)
 
-	mux.HandleFunc("POST /api/project/create", app.createProject)
-	mux.HandleFunc("GET /api/project/get_alls", app.getallProjects)
-	mux.HandleFunc("GET /api/project/search", app.searchProject)
+	mux.HandleFunc("POST /api/projects", app.createProject)
+	mux.HandleFunc("GET /api/projects", app.getallProjects)
+	mux.HandleFunc("GET /api/project", app.searchProject)
 
 
-	mux.HandleFunc("POST /api/participant/create", app.createParticipant)
-	mux.HandleFunc("GET /api/participant/get_alls", app.getallParticipant)
+	mux.HandleFunc("POST /api/participants", app.createParticipant)
+	mux.HandleFunc("GET /api/participants", app.getallParticipant)
 
 	mux.HandleFunc("POST /api/assignments", app.assigmentProject)
 	mux.HandleFunc("GET /api/assignments", app.getAssignments)

@@ -63,7 +63,28 @@
                 }
             }
         },
-        "/participant/create": {
+        "/participants": {
+            "get": {
+                "description": "Retorna la lista de todos los participantes registrados",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Participantes"
+                ],
+                "summary": "Obtener todos los participantes",
+                "responses": {
+                    "200": {
+                        "description": "Lista de participantes",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/store.Participants"
+                            }
+                        }
+                    }
+                }
+            },
             "post": {
                 "description": "Crea un nuevo participante",
                 "consumes": [
@@ -97,30 +118,60 @@
                 }
             }
         },
-        "/participant/get_alls": {
+        "/project": {
             "get": {
-                "description": "Retorna la lista de todos los participantes registrados",
+                "description": "Retorna una lista de proyectos cuyo nombre coincide parcialmente con el valor buscado",
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
-                    "Participantes"
+                    "Proyectos"
                 ],
-                "summary": "Obtener todos los participantes",
+                "summary": "Buscar proyectos por nombre",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Nombre del proyecto a buscar",
+                        "name": "name",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
-                        "description": "Lista de participantes",
+                        "description": "Lista de proyectos encontrados",
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/store.Participants"
+                                "$ref": "#/definitions/store.Project"
                             }
                         }
                     }
                 }
             }
         },
-        "/project/create": {
+        "/projects": {
+            "get": {
+                "description": "Retorna la lista de todos los proyectos registrados",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Proyectos"
+                ],
+                "summary": "Obtener todos los proyectos",
+                "responses": {
+                    "200": {
+                        "description": "Lista de proyectos",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/store.Project"
+                            }
+                        }
+                    }
+                }
+            },
             "post": {
                 "description": "Crea un nuevo proyecto",
                 "consumes": [
@@ -149,61 +200,6 @@
                         "description": "Created",
                         "schema": {
                             "$ref": "#/definitions/store.Project"
-                        }
-                    }
-                }
-            }
-        },
-        "/project/get_alls": {
-            "get": {
-                "description": "Retorna la lista de todos los proyectos registrados",
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Proyectos"
-                ],
-                "summary": "Obtener todos los proyectos",
-                "responses": {
-                    "200": {
-                        "description": "Lista de proyectos",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/store.Project"
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/project/search": {
-            "get": {
-                "description": "Retorna una lista de proyectos cuyo nombre coincide parcialmente con el valor buscado",
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Proyectos"
-                ],
-                "summary": "Buscar proyectos por nombre",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "Nombre del proyecto a buscar",
-                        "name": "name",
-                        "in": "query",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Lista de proyectos encontrados",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/store.Project"
-                            }
                         }
                     }
                 }
